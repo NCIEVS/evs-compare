@@ -19,6 +19,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import gov.nih.nci.evs.compare.searchservice.model.Concept;
 import gov.nih.nci.evs.compare.searchservice.model.ConceptWrapper;
 import gov.nih.nci.evs.compare.searchservice.model.RestEntity;
+import gov.nih.nci.evs.compare.searchservice.model.RestEntityWrapper;
 
 
 @Service
@@ -139,6 +140,39 @@ public class EVSAPIBaseService {
 			return null;
 		}
 	}
+	
+
+	public RestEntityWrapper getConceptsByInclusion(String term, String include) {
+		WebClient client = getNewWebClientWithBuffer();
+		try {
+			return client
+					.get()
+					.uri(new URI(baseURL  + "?include=" + include + "&term=" + term))
+					.retrieve()
+					.bodyToMono(RestEntityWrapper.class)
+					.block();
+		} catch (URISyntaxException e) {
+			log.info("Bad Resource Request, check the URL for special characters: ", e);
+			return null;
+		}
+	}
+	
+	public RestEntityWrapper getConceptsByInclusionAndType(String term, String include, String type) {
+		WebClient client = getNewWebClientWithBuffer();
+		try {
+			return client
+					.get()
+					.uri(new URI(baseURL  + "?include=" + include + "&type=" + type + "&term=" + term))
+					.retrieve()
+					.bodyToMono(RestEntityWrapper.class)
+					.block();
+		} catch (URISyntaxException e) {
+			log.info("Bad Resource Request, check the URL for special characters: ", e);
+			return null;
+		}
+	}
+	
+	
 //	
 //	public List<Role> getRestRole(String code) {	
 //		WebClient client = getNewWebClientWithBuffer();
@@ -268,5 +302,7 @@ public class EVSAPIBaseService {
 				    .build())
 				  .build();
 	}
+
+
 
 }
