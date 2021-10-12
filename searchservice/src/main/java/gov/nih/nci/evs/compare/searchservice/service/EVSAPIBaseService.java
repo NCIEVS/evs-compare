@@ -16,6 +16,8 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import gov.nih.nci.evs.compare.searchservice.model.Concept;
+import gov.nih.nci.evs.compare.searchservice.model.ConceptWrapper;
 import gov.nih.nci.evs.compare.searchservice.model.RestEntity;
 
 
@@ -122,7 +124,7 @@ public class EVSAPIBaseService {
 //					.block();
 //	}
 //	
-	public RestEntity[] getEntities(String term) {	
+	public ConceptWrapper getConcepts(String term) {	
 		
 		WebClient client = getNewWebClientWithBuffer();
 		try {
@@ -130,7 +132,7 @@ public class EVSAPIBaseService {
 					.get()
 					.uri(new URI(baseURL + "?term=" + term))
 					.retrieve()
-					.bodyToMono(RestEntity[].class)
+					.bodyToMono(ConceptWrapper.class)
 					.block();
 		} catch (URISyntaxException e) {
 			log.info("Bad Resource Request, check the URL for special characters: ", e);

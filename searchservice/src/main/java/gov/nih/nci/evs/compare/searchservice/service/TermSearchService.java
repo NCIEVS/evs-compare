@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import gov.nih.nci.evs.compare.searchservice.model.Concept;
+import gov.nih.nci.evs.compare.searchservice.model.ConceptWrapper;
 import gov.nih.nci.evs.compare.searchservice.model.RestEntity;
 
 
@@ -17,8 +19,8 @@ public class TermSearchService {
 	EVSAPIBaseService service;
 	
 	
-	public List<RestEntity> getRestEntities(String term){
-		RestEntity[] entities = service.getEntities(term);
-		return Arrays.stream(entities).collect(Collectors.toList());
+	public ConceptWrapper getConcepts(String term){
+		ConceptWrapper entities = service.getConcepts(term);
+		return entities;
 	}
 }
