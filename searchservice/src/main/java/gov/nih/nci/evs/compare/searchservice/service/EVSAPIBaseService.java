@@ -159,10 +159,12 @@ public class EVSAPIBaseService {
 	
 	public RestEntityWrapper getConceptsByInclusionAndType(String term, String include, String type) {
 		WebClient client = getNewWebClientWithBuffer();
+		term = term.trim();
+		term = term.replace(" ", "%20");
 		try {
 			return client
 					.get()
-					.uri(new URI(baseURL  + "?include=" + include + "&type=" + type + "&term=" + term))
+					.uri(new URI(baseURL  + "?include=" + include + "&type=" + type + "&term=" + "blood%20smear"))
 					.retrieve()
 					.bodyToMono(RestEntityWrapper.class)
 					.block();
