@@ -2,7 +2,6 @@ package gov.nih.nci.evs.compare.searchservice.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,12 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-import gov.nih.nci.evs.compare.searchservice.model.Concept;
 import gov.nih.nci.evs.compare.searchservice.model.ConceptWrapper;
-import gov.nih.nci.evs.compare.searchservice.model.RestEntity;
 import gov.nih.nci.evs.compare.searchservice.model.RestEntityWrapper;
+import gov.nih.nci.evs.compare.searchservice.model.RestPropertyMetadata;
 
 
 @Service
@@ -66,6 +63,34 @@ public class EVSAPIBaseService {
 	@Value("${REST_DEF_URL}")
 	private String defURL;
 	
+	@Value("${REST_STATUS_URL}")
+	private String statusURL;
+	
+	@Value("${REST_DEFSOURCE_URL}")
+	private String defSourceURL;
+
+	@Value("${REST_DEFTYPE_URL}")
+	private String defTypeURL;
+
+	@Value("${REST_SYNSOURCE_URL}")
+	private String synSourceURL;
+
+	@Value("${REST_SYNTYPE_URL}")
+	private String synTypeURL;
+	
+//	@Value("${REST_DEF_URL}")
+//	private String defURL;
+//	@Value("${REST_DEF_URL}")
+//	private String defURL;
+//	@Value("${REST_DEF_URL}")
+//	private String defURL;
+//	@Value("${REST_DEF_URL}")
+//	private String defURL;
+//	@Value("${REST_DEF_URL}")
+//	private String defURL;
+//	@Value("${REST_DEF_URL}")
+//	private String defURL;
+	
 	@Value("${REST_PROP_FILTER_LIST}")
 	private String filterList;
 	
@@ -83,6 +108,8 @@ public class EVSAPIBaseService {
 
 	@Value("${ASSOCIATIONS}")
 	private String associations;
+
+
 	
 	
     
@@ -164,7 +191,7 @@ public class EVSAPIBaseService {
 		try {
 			return client
 					.get()
-					.uri(new URI(baseURL  + "?include=" + include + "&type=" + type + "&term=" + "blood%20smear"))
+					.uri(new URI(baseURL  + "?include=" + include + "&type=" + type + "&term=" + term))
 					.retrieve()
 					.bodyToMono(RestEntityWrapper.class)
 					.block();
@@ -205,30 +232,95 @@ public class EVSAPIBaseService {
 //		return roots;
 //	}
 //	
-//	public RestPropertyMetadata[] getRestProperties(RestTemplate template){
-//		return template
-//		.getForObject(
-//		 baseMetaURL + propURL
-//				,RestPropertyMetadata[].class);
-//
-//	}
-//	
-//	public RestPropertyMetadata[] getRestSynonyms(RestTemplate template){
-//		return template
-//		.getForObject(
-//		 baseMetaURL + synURL
-//				,RestPropertyMetadata[].class);
-//
-//	}
-//	
-//	public RestPropertyMetadata[] getRestDefinitions(RestTemplate template){
-//		return template
-//		.getForObject(
-//		 baseMetaURL + defURL
-//				,RestPropertyMetadata[].class);
-//
-//	}
-//
+	public RestPropertyMetadata[] getRestProperties(RestTemplate template){
+		return template
+		.getForObject(
+		 baseMetaURL + propURL
+				,RestPropertyMetadata[].class);
+
+	}
+	
+	public RestPropertyMetadata[] getRestSynonyms(RestTemplate template){
+		return template
+		.getForObject(
+		 baseMetaURL + synURL
+				,RestPropertyMetadata[].class);
+
+	}
+	
+	public RestPropertyMetadata[] getRestDefinitions(RestTemplate template){
+		return template
+		.getForObject(
+		 baseMetaURL + defURL
+				,RestPropertyMetadata[].class);
+
+	}
+	
+	public List<String> getRestConceptStatus(){
+		WebClient client = getNewWebClientWithBuffer();
+		return Stream.of(client
+				.get()
+				.uri(baseMetaURL + statusURL)
+				.retrieve()
+				.bodyToMono(String[].class)
+				.block()).collect(Collectors.toList());	
+	}
+	
+
+	public List<RestPropertyMetadata> getRestDefSource() {
+		WebClient client = getNewWebClientWithBuffer();
+		return Stream.of(client
+				.get()
+				.uri(baseMetaURL + defSourceURL)
+				.retrieve()
+				.bodyToMono(RestPropertyMetadata[].class)
+				.block()).collect(Collectors.toList());
+	}
+
+
+	public List<RestPropertyMetadata> getRestDefType() {
+		WebClient client = getNewWebClientWithBuffer();
+		return Stream.of(client
+				.get()
+				.uri(baseMetaURL + defTypeURL)
+				.retrieve()
+				.bodyToMono(RestPropertyMetadata[].class)
+				.block()).collect(Collectors.toList());
+	}
+
+
+	public List<RestPropertyMetadata> getRestProperties() {
+		WebClient client = getNewWebClientWithBuffer();
+		return Stream.of(client
+				.get()
+				.uri(baseMetaURL + propURL)
+				.retrieve()
+				.bodyToMono(RestPropertyMetadata[].class)
+				.block()).collect(Collectors.toList());	
+	}
+
+
+	public List<RestPropertyMetadata> getRestSynSource() {
+		WebClient client = getNewWebClientWithBuffer();
+		return Stream.of(client
+				.get()
+				.uri(baseMetaURL + synSourceURL)
+				.retrieve()
+				.bodyToMono(RestPropertyMetadata[].class)
+				.block()).collect(Collectors.toList());
+	}
+
+
+	public List<RestPropertyMetadata> getRestSynType() {
+		WebClient client = getNewWebClientWithBuffer();
+		return Stream.of(client
+				.get()
+				.uri(baseMetaURL + synTypeURL)
+				.retrieve()
+				.bodyToMono(RestPropertyMetadata[].class)
+				.block()).collect(Collectors.toList());
+	}
+
 //	public String getCuratedTopNodeList() {
 //		return curatedTopNodeList;
 //	}
@@ -304,6 +396,8 @@ public class EVSAPIBaseService {
 				    .build())
 				  .build();
 	}
+
+
 
 
 
