@@ -1,16 +1,12 @@
 package gov.nih.nci.evs.compare.searchservice.model;
 
-import gov.nih.nci.evs.compare.searchservice.util.CommonServices.Formats;
-
 public class DeferredStatus {
 	public static enum Status{TRUE, FALSE, EXPIRED}
 	
 	public Status status;
-	public Formats format;
 
-	public DeferredStatus(Status status, Formats format) {
+	public DeferredStatus(Status status) {
 		this.status = status;
-		this.format = format;
 	}
 
 	public Status getStatus() {
@@ -21,12 +17,5 @@ public class DeferredStatus {
 		this.status = status;
 	}
 
-	public Formats getFormat() {
-		return format;
-	}
-
-	public void setFormat(Formats format) {
-		this.format = format;
-	}
 
 }

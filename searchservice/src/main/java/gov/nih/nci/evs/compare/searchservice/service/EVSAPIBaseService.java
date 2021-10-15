@@ -21,7 +21,7 @@ import gov.nih.nci.evs.compare.searchservice.model.RestPropertyMetadata;
 @Service
 public class EVSAPIBaseService {
 
-	private Logger log = LoggerFactory.getLogger(TimedDeferredResultWrapper.class);
+	private Logger log = LoggerFactory.getLogger(EVSAPIBaseService.class);
 
 	@Value("${evs.api.url.baseurl}")
 	private String baseURL;
