@@ -78,6 +78,9 @@ public class EVSAPIBaseService {
 	@Value("${REST_SYNTYPE_URL}")
 	private String synTypeURL;
 	
+	@Value("${REST_QUERYTYPE}")
+	private String queryType;
+	
 //	@Value("${REST_DEF_URL}")
 //	private String defURL;
 //	@Value("${REST_DEF_URL}")
@@ -395,6 +398,11 @@ public class EVSAPIBaseService {
 				      .maxInMemorySize(76 * 256 * 1024))
 				    .build())
 				  .build();
+	}
+
+
+	public List<String> getRestQueryType() {
+		return Stream.of(queryType.split(",")).collect(Collectors.toList());
 	}
 
 

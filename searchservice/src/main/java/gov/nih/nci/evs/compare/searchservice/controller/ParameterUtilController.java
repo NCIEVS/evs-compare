@@ -44,4 +44,10 @@ public class ParameterUtilController {
 	  public List<RestPropertyMetadata> synTermTypeList() {
 			return service.getSynonymTermType();
 	  }
+	
+	@GetMapping("/querytype")
+	  public List<String> queryTypeList() {
+			return service.getQueryType();
+	  }
+	
 }

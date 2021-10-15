@@ -50,4 +50,10 @@ public class ParameterUtilityService {
 	}
 
 
+	public List<String> getQueryType() {
+		List<String> entities = service.getRestQueryType();
+		return entities;
+	}
+
+
 }

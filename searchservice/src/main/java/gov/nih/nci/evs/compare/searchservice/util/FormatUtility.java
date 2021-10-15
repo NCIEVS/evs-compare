@@ -7,12 +7,15 @@ public class FormatUtility {
 	public final static String[] ASSOCIATION_FIELDS = {"concept code", "concept name", "association","target code","target name"};
 
 	
-	public String produceDelimitedQueryRecord(String separator, String codes, int level, String props) {
+	public String produceDelimitedQueryRecord(
+			String separator, String term, String props, String queryType, String recordStart, String pageSize) {
 		String appendedQuery = "\r\n" + "\r\n" + "\r\n" +
-				"\r\n" + "Report Search Parameters: " + 
-				"\r\n" +  "\"|Input:  " + codes + "|\"" +
-				"\r\n" + "Hierarchy level: " + level +
-				"\r\n" +  "\"|Properties Selected: " + props + "|\"";
+				"\r\n" + "Search parmeters: " + 
+				"\r\n" +  "\"|Input:  " + term + "|\"" +
+				"\r\n" +  "\"|Query Type:  " + queryType + "|\"" +
+				"\r\n" +  "\"|From Record:  " + recordStart + "|\"" +
+				"\r\n" +  "\"|Concept attributes:  " + props + "|\"" +
+				"\r\n" +  "\"|Page size:  " + pageSize + "|\"";
 		return appendedQuery;
 	}
 	
