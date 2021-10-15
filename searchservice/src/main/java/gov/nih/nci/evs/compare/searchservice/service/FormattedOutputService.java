@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import gov.nih.nci.evs.compare.searchservice.model.RestEntity;
 import gov.nih.nci.evs.compare.searchservice.model.RestEntityWrapper;
 import gov.nih.nci.evs.compare.searchservice.util.CommonServices;
 import gov.nih.nci.evs.compare.searchservice.util.TabDelUtility;
