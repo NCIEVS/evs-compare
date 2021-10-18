@@ -22,8 +22,7 @@ private String version;
  */
 @Override
 public String toString() {
-	return "RestPropertyMetadata"
-			+ "{code=" + code + ", name=" + name + "}";
+	return  code + ":" + name ;
 }
 /**
  * @return the code

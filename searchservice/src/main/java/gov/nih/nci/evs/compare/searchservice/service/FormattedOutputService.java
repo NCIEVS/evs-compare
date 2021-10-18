@@ -37,6 +37,19 @@ public class FormattedOutputService {
 		return new ByteArrayInputStream(new TabDelUtility()
 				.produceMinTabDelOutputFromListWithHeading(reWrappers, terms, props, queryType, recordStart, pageSize).getBytes());
 	}
+	
+	public InputStream produceFullTabDelOutputFromList(
+			String terms, String props, String queryType, String recordStart, String pageSize) {
+		List<RestEntityWrapper> reWrappers =  CommonServices
+				.splitInput(terms)
+				.stream()
+				.map(x ->
+				tsservice.getRestEntityInclusionsByType(x, "minimal", queryType))
+				.collect(Collectors.toList());
+
+		return new ByteArrayInputStream(new TabDelUtility()
+				.produceMinTabDelOutputFromListWithHeading(reWrappers, terms, props, queryType, recordStart, pageSize).getBytes());
+	}
 
 	
 }

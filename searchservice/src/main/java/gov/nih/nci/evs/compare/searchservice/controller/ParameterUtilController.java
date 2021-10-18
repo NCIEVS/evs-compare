@@ -1,12 +1,12 @@
 package gov.nih.nci.evs.compare.searchservice.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import gov.nih.nci.evs.compare.searchservice.model.RestPropertyMetadata;
 import gov.nih.nci.evs.compare.searchservice.service.ParameterUtilityService;
 
 @RestController
@@ -21,33 +21,34 @@ public class ParameterUtilController {
 	  }
 	
 	@GetMapping("/defsourcelist")
-	  public List<RestPropertyMetadata> searchDefSourcelist() {
-			return service.getDefSource();
+	  public List<String> searchDefSourcelist() {
+		return service.getDefSource().stream().map(x -> x.toString()).collect(Collectors.toList());
 	  }
 	
 	@GetMapping("/deftypelist")
-	  public List<RestPropertyMetadata> searchdDefTypelist() {
-			return service.getDefType();
+	  public List<String> searchdDefTypelist() {
+		return service.getDefType().stream().map(x -> x.toString()).collect(Collectors.toList());
+		//	return service.getDefType();
 	  }
 	
 	@GetMapping("/propertylist")
-	  public List<RestPropertyMetadata> propertylist() {
-			return service.getproperties();
+	  public List<String> propertylist() {
+			return service.getproperties().stream().map(x -> x.toString()).collect(Collectors.toList());
 	  }
 	
 	@GetMapping("/synsourcelist")
-	  public List<RestPropertyMetadata> synonymSourcelist() {
-			return service.getSynonymSource();
+	  public List<String> synonymSourcelist() {
+			return service.getSynonymSource().stream().map(x -> x.toString()).collect(Collectors.toList());
 	  }
 	
 	@GetMapping("/syntermtypelist")
-	  public List<RestPropertyMetadata> synTermTypeList() {
-			return service.getSynonymTermType();
+	  public List<String> synTermTypeList() {
+			return service.getSynonymTermType().stream().map(x -> x.toString()).collect(Collectors.toList());
 	  }
 	
 	@GetMapping("/querytype")
 	  public List<String> queryTypeList() {
-			return service.getQueryType();
+			return service.getQueryType().stream().map(x -> x.toString()).collect(Collectors.toList());
 	  }
 	
 }
