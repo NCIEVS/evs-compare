@@ -51,4 +51,9 @@ public class ParameterUtilController {
 			return service.getQueryType().stream().map(x -> x.toString()).collect(Collectors.toList());
 	  }
 	
+	@GetMapping("/semantictypelist")
+	  public List<String> semanticTypeList() {
+			return service.getSemanticTypes();
+	  }
+	
 }
