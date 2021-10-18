@@ -34,51 +34,50 @@ import gov.nih.nci.evs.compare.searchservice.model.Synonym;
 import gov.nih.nci.evs.compare.searchservice.model.TypeListAndPositionTuple;
 
 public class CommonServices {
-	
-	
+
 	public String adjustTextForContainedComma(String text) {
-	 if(text.contains(",")) {
-		 return "\"" + text + "\"";
-	 }
-	 else {return text;}
+		if (text.contains(",")) {
+			return "\"" + text + "\"";
+		} else {
+			return text;
+		}
 	}
-	
-	public static String cleanListOutPut(String list){
-		if (list == null)  return null;
+
+	public static String cleanListOutPut(String list) {
+		if (list == null)
+			return null;
 		return list.replace("[", "").replace("]", "");
 	}
-	
-	
+
 	public boolean existsCheck(List<? extends PropertyPrime> x) {
 		return x == null || x.size() == 0;
 	}
-	
-	public List<Property> validateAndOrCreateEmptyPropertyList(TypeListAndPositionTuple tuple){
-		if(tuple.getPos() == null) {return new ArrayList<Property>();}
-		else {return tuple.getProperties();}
+
+	public List<Property> validateAndOrCreateEmptyPropertyList(TypeListAndPositionTuple tuple) {
+		if (tuple.getPos() == null) {
+			return new ArrayList<Property>();
+		} else {
+			return tuple.getProperties();
+		}
 	}
-	
+
 	public List<String> getHeadersByPosition(ConcurrentMap<String, TypeListAndPositionTuple> map) {
-		return map.values()
-				.stream()
-				.sorted(Comparator
-				.comparing(TypeListAndPositionTuple::getPos))
-				.map(x -> x.getType())
-				.collect(Collectors.toList());
+		return map.values().stream().sorted(Comparator.comparing(TypeListAndPositionTuple::getPos))
+				.map(x -> x.getType()).collect(Collectors.toList());
 	}
-	
-	public static List<String> splitInput(String codes){
-		if(codes == null) {
+
+	public static List<String> splitInput(String codes) {
+		if (codes == null) {
 			System.out.println("Input for code, property, or source cannot be null");
 			return null;
 		}
 		return Arrays.asList(codes.split(","));
 	}
-	
+
 	public static Gson getGsonForPrettyPrint() {
 		return new GsonBuilder().setPrettyPrinting().create();
 	}
-	
+
 	public static RestTemplate getRestTemplate(RestTemplateBuilder builder) {
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -87,7 +86,7 @@ public class CommonServices {
 		builder.additionalMessageConverters(messageConverters);
 		return builder.build();
 	}
-	
+
 	public static RestTemplate getRestTemplate() {
 		RestTemplateBuilder builder = new RestTemplateBuilder();
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
@@ -97,40 +96,41 @@ public class CommonServices {
 		builder.additionalMessageConverters(messageConverters);
 		return builder.build();
 	}
-	
-	  public static List<String> getCodesListForCode(String code){
-		  List<String> list = new ArrayList<String>();
-		  list.add(code);
-		  return list;
-	  }
-	  
-	  
-	 public static void saveOrUpdateWeightedRels(Rel role, Hashtable<String, Rel> wRoles) {
-			Rel rStored = wRoles.get(role.getType());
-			role.setWeight(1);
-			if(rStored == null){wRoles.put(role.getType(), role);
-			}else {rStored.setWeight(rStored.getWeight() + 1);
-			}
-		}
-	 
-		
-		public static List<Rel> getSortedRels(List<? extends Rel> rels){
-			return CommonServices.sortRelListByWeight(getDistinctWeightedRelsForEntityCodes(rels));
-		}
-		
-		public static List<Rel> getDistinctWeightedRelsForEntityCodes(List<? extends Rel> rawRels){
-			Hashtable<String,Rel> distinctRels = new Hashtable<String,Rel>();	
-			rawRels.stream().forEach(x -> CommonServices.saveOrUpdateWeightedRels(x, distinctRels));
-			return distinctRels.values().stream().collect(Collectors.toList());
-		}
-	 
-		public static List<Rel> sortRelListByWeight(List<Rel> rels){
-			Collections.sort(rels, new Comparator<Rel>() {            @Override
-	            public int compare(Rel r1, Rel r2) {
-	            return r2.getWeight() - r1.getWeight();
-	        }});
-			return rels;
-		}
 
+	public static List<String> getCodesListForCode(String code) {
+		List<String> list = new ArrayList<String>();
+		list.add(code);
+		return list;
+	}
+
+	public static void saveOrUpdateWeightedRels(Rel role, Hashtable<String, Rel> wRoles) {
+		Rel rStored = wRoles.get(role.getType());
+		role.setWeight(1);
+		if (rStored == null) {
+			wRoles.put(role.getType(), role);
+		} else {
+			rStored.setWeight(rStored.getWeight() + 1);
+		}
+	}
+
+	public static List<Rel> getSortedRels(List<? extends Rel> rels) {
+		return CommonServices.sortRelListByWeight(getDistinctWeightedRelsForEntityCodes(rels));
+	}
+
+	public static List<Rel> getDistinctWeightedRelsForEntityCodes(List<? extends Rel> rawRels) {
+		Hashtable<String, Rel> distinctRels = new Hashtable<String, Rel>();
+		rawRels.stream().forEach(x -> CommonServices.saveOrUpdateWeightedRels(x, distinctRels));
+		return distinctRels.values().stream().collect(Collectors.toList());
+	}
+
+	public static List<Rel> sortRelListByWeight(List<Rel> rels) {
+		Collections.sort(rels, new Comparator<Rel>() {
+			@Override
+			public int compare(Rel r1, Rel r2) {
+				return r2.getWeight() - r1.getWeight();
+			}
+		});
+		return rels;
+	}
 
 }
