@@ -29,4 +29,9 @@ public class TermSearchService {
 		RestEntityWrapper entities = service.getConceptsByInclusionAndType(term, include, type);
 		return entities;
 	}
+	
+	public RestEntityWrapper getRestEntityInclusionsByTypeSourcePropsIncludes(String source, String props,String include,String querytype, String terms, String start, String size) {
+		RestEntityWrapper entities = service.getConceptsBySourcePropsInclusionType(source, props, include, querytype, terms, start, size);
+		return entities;
+	}
 }

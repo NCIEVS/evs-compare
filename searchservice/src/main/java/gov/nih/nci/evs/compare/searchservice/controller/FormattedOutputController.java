@@ -23,7 +23,7 @@ public class FormattedOutputController {
 	@Autowired
 	FormattedOutputService service;
 
-	@GetMapping(value = "/get-minfile-for-readCodes/{props}/{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@GetMapping(value = "/get-minfile-for-search/{props}/{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<InputStreamResource> getFileByFormat(@PathVariable String terms, @PathVariable String props) {
 		ByteArrayInputStream in;
 		HttpHeaders headers = new HttpHeaders();
@@ -35,13 +35,26 @@ public class FormattedOutputController {
 
 	}
 	
-	@GetMapping(value = "/get-advancedfile-for-readCodes/{props}/{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@GetMapping(value = "/get-advancedfile-for-search/{props}/{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<InputStreamResource> getFullFileByFormat(@PathVariable String terms, @PathVariable String props) {
 		ByteArrayInputStream in;
 		HttpHeaders headers = new HttpHeaders();
 
 		headers.add("Content-Disposition", "attachment; filename=" + "output" + ".txt");
 		in = (ByteArrayInputStream) service.produceMinTabDelOutputFromList(terms, null, "match", "0", "10");
+
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
+
+	}
+	
+	@GetMapping(value = "/get-advancedfile-for-extended-search/{source}/{props}/{includes}/{querytype}{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<InputStreamResource> getFullFileExtendedParams(
+			@PathVariable String source,@PathVariable String props,@PathVariable String includes,@PathVariable String querytype, @PathVariable String terms) {
+		ByteArrayInputStream in;
+		HttpHeaders headers = new HttpHeaders();
+
+		headers.add("Content-Disposition", "attachment; filename=" + "output" + ".txt");
+		in = (ByteArrayInputStream) service.produceFullTabDelOutputFromList(source,props,includes,querytype,terms, "0", "10");
 
 		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
 

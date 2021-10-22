@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import gov.nih.nci.evs.compare.searchservice.model.RestPropertyMetadata;
+import gov.nih.nci.evs.compare.searchservice.util.CommonServices;
 import gov.nih.nci.evs.compare.searchservice.util.SemanticTypeWrapper;
 
 @Service
@@ -61,6 +62,16 @@ public class ParameterUtilityService {
 	public List<String> getSemanticTypes() {
 		List<String> entities = Stream.of(new SemanticTypeWrapper().getSemanticTypes()).collect(Collectors.toList());
 		return entities;
+	}
+
+
+	public List<String> getEntityScope() {
+		return service.getScopeType();
+	}
+
+
+	public List<String> getTerminologies() {
+		return service.getTerminologies();
 	}
 
 

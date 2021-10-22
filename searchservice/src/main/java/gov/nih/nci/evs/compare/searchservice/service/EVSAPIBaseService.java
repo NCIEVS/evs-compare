@@ -17,6 +17,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import gov.nih.nci.evs.compare.searchservice.model.ConceptWrapper;
 import gov.nih.nci.evs.compare.searchservice.model.RestEntityWrapper;
 import gov.nih.nci.evs.compare.searchservice.model.RestPropertyMetadata;
+import gov.nih.nci.evs.compare.searchservice.util.CommonServices;
 
 @Service
 public class EVSAPIBaseService {
@@ -25,6 +26,9 @@ public class EVSAPIBaseService {
 
 	@Value("${evs.api.url.baseurl}")
 	private String baseURL;
+	
+	@Value("${evs.api.url.basesourceurl}")
+	private String baseSourceURL;
 
 	@Value("${evs.api.url.metadataurl}")
 	private String baseMetaURL;
@@ -61,6 +65,12 @@ public class EVSAPIBaseService {
 
 	@Value("${REST_QUERYTYPE}")
 	private String queryType;
+	
+	@Value("${REST_SCOPETYPE}")
+	private String scopeType;
+	
+	@Value("${REST_TERMINOLOGIES}")
+	private String terminologies;
 
 	public ConceptWrapper getConcepts(String term) {
 
@@ -91,6 +101,22 @@ public class EVSAPIBaseService {
 		term = term.replace(" ", "%20");
 		try {
 			return client.get().uri(new URI(baseURL + "?include=" + include + "&type=" + type + "&term=" + term))
+					.retrieve().bodyToMono(RestEntityWrapper.class).block();
+		} catch (URISyntaxException e) {
+			log.info("Bad Resource Request, check the URL for special characters: ", e);
+			return null;
+		}
+	}
+	
+	public RestEntityWrapper getConceptsBySourcePropsInclusionType(String source, String props, String includes, String querytype, String terms, String start, String size) {
+		WebClient client = getNewWebClientWithBuffer();
+		terms = terms.trim();
+		terms = terms.replace(" ", "%20");
+		try {
+			return client.get().uri(new URI(
+					baseURL + "/" + source + "/search" + "?props=" + props 
+					+ "&includes=" + includes + "&type=" + querytype 
+					+ "&term=" + terms + "&fromRecord=" + start + "&pageSize=" + size))
 					.retrieve().bodyToMono(RestEntityWrapper.class).block();
 		} catch (URISyntaxException e) {
 			log.info("Bad Resource Request, check the URL for special characters: ", e);
@@ -340,5 +366,18 @@ public class EVSAPIBaseService {
 	public void setQueryType(String queryType) {
 		this.queryType = queryType;
 	}
+
+	public List<String> getScopeType() {
+		return CommonServices.splitInput(scopeType);
+	}
+
+	public void setScopeType(String scopeType) {
+		this.scopeType = scopeType;
+	}
+
+	public List<String> getTerminologies() {
+		return CommonServices.splitInput(terminologies);
+	}
+
 
 }

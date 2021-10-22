@@ -56,4 +56,14 @@ public class ParameterUtilController {
 			return service.getSemanticTypes();
 	  }
 	
+	@GetMapping("/getentityscopetype")
+	  public List<String> entityScopeList() {
+			return service.getEntityScope();
+	  }
+	
+	@GetMapping("/terminologies")
+	  public List<String> terminologyList() {
+			return service.getTerminologies();
+	  }
+	
 }
