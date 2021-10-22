@@ -13,6 +13,7 @@ import gov.nih.nci.evs.compare.searchservice.model.RestEntity;
 
 @Component
 public class SemanticTypeFilter {
+	
 
 	@Value("${REST_SEMANTICTYPE}")
 	private String SEMANTIC_TYPE;
