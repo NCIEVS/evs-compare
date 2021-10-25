@@ -5,11 +5,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import gov.nih.nci.evs.compare.searchservice.service.ParameterUtilityService;
 
 @RestController
+@RequestMapping("/util")
 public class ParameterUtilController {
 	
 	@Autowired
