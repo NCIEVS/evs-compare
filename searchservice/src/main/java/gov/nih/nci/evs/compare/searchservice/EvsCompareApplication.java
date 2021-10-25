@@ -48,27 +48,14 @@ public class EvsCompareApplication extends SpringBootServletInitializer {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/properties")
+				registry.addMapping("/util/**")
 					.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
-				registry.addMapping("/resolve-children-for-codes/**")
-					.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
-				registry.addMapping("/resolve-flat-branch-for-codes/**")
-					.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
-				registry.addMapping("/resolve-branch-for-codes/**")
-					.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
-				registry.addMapping("/codereadrest/**")
-					.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
-				registry.addMapping("/codereadrestprops/**")
+				registry.addMapping("/search/**")
 					.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
 				registry.addMapping("/download/**")
 					.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
-				registry.addMapping("/curated-top-nodes")
-					.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
-				registry.addMapping("/roots/**")
-					.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
-				registry.addMapping("/roles/**")
-				.allowedOrigins(prod_co_url,dev_co_url,client_co_url,qa_co_url,stage_co_url,ui_client_co_url);
 			}
 		};
+
 	}
 }
