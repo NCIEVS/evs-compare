@@ -49,7 +49,7 @@ public class FormattedOutputController {
 
 	}
 	
-	@GetMapping(value = "/get-advancedfile-for-extended-search/{source}/{props}/{includes}/{querytype}{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@GetMapping(value = "/get-advancedfile-for-extended-search/{source}/{props}/{includes}/{querytype}/{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<InputStreamResource> getFullFileExtendedParams(
 			@PathVariable String source,@PathVariable String props,@PathVariable String includes,@PathVariable String querytype, @PathVariable String terms) {
 		ByteArrayInputStream in;
