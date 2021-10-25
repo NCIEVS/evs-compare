@@ -49,16 +49,27 @@ public class FormattedOutputController {
 
 	}
 	
-	@GetMapping(value = "/get-advancedfile-for-extended-search/{source}/{props}/{includes}/{querytype}/{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	public ResponseEntity<InputStreamResource> getFullFileExtendedParams(
+	@GetMapping(value = "/get-advancedfile-for-extended-search-with-props/{source}/{props}/{includes}/{querytype}/{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<InputStreamResource> getFullFileExtendedParamsWithProps(
 			@PathVariable String source,@PathVariable String props,@PathVariable String includes,@PathVariable String querytype, @PathVariable String terms) {
 		ByteArrayInputStream in;
 		HttpHeaders headers = new HttpHeaders();
 
 		headers.add("Content-Disposition", "attachment; filename=" + "output" + ".txt");
-		in = (ByteArrayInputStream) service.produceFullTabDelOutputFromList(source,props,includes,querytype,terms, "0", "10");
+		in = (ByteArrayInputStream) service.produceFullTabDelOutputFromListWithProps(source,props,"minimal",querytype,terms, "0", "10");
 
 		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
+	}
+	
+	@GetMapping(value = "/get-advancedfile-for-extended-search/{source}/{includes}/{querytype}/{terms}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	public ResponseEntity<InputStreamResource> getFullFileExtendedParams(
+			@PathVariable String source,@PathVariable String includes,@PathVariable String querytype, @PathVariable String terms) {
+		ByteArrayInputStream in;
+		HttpHeaders headers = new HttpHeaders();
 
+		headers.add("Content-Disposition", "attachment; filename=" + "output" + ".txt");
+		in = (ByteArrayInputStream) service.produceFullTabDelOutputFromList(source,"minimal",querytype,terms, "0", "10");
+
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
 	}
 }

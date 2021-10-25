@@ -35,7 +35,7 @@ public class FormattedOutputService {
 				.collect(Collectors.toList());
 
 		return new ByteArrayInputStream(new TabDelUtility()
-				.produceMinTabDelOutputFromListWithHeading(reWrappers, terms, props, queryType, recordStart, pageSize).getBytes());
+				.produceMinTabDelOutputFromListWithHeadingProps(reWrappers, terms, props, queryType, recordStart, pageSize).getBytes());
 	}
 	
 	public InputStream produceFullTabDelOutputFromList(
@@ -48,21 +48,35 @@ public class FormattedOutputService {
 				.collect(Collectors.toList());
 
 		return new ByteArrayInputStream(new TabDelUtility()
-				.produceMinTabDelOutputFromListWithHeading(reWrappers, terms, props, queryType, recordStart, pageSize).getBytes());
+				.produceMinTabDelOutputFromListWithHeadingProps(reWrappers, terms, props, queryType, recordStart, pageSize).getBytes());
 	}
 	
-	public InputStream produceFullTabDelOutputFromList(
+	public ByteArrayInputStream produceFullTabDelOutputFromList(String source, String includes, String queryType,
+			String terms, String recordStart, String pageSize) {
+		List<RestEntityWrapper> reWrappers =  CommonServices
+				.splitInput(terms)
+				.stream()
+				.map(x ->
+				tsservice.getRestEntityInclusionsByTypeSourceIncludes(source,includes, queryType, terms, recordStart, pageSize))
+				.collect(Collectors.toList());
+
+		return new ByteArrayInputStream(new TabDelUtility()
+				.produceMinTabDelOutputFromListWithHeading(reWrappers, terms, queryType, recordStart, pageSize).getBytes());
+	}
+	
+	public InputStream produceFullTabDelOutputFromListWithProps(
 			String source,String props,String includes, String queryType, String terms, String recordStart, String pageSize) {
 		List<RestEntityWrapper> reWrappers =  CommonServices
 				.splitInput(terms)
 				.stream()
 				.map(x ->
-				tsservice.getRestEntityInclusionsByType(x, "minimal", queryType))
+				tsservice.getRestEntityInclusionsByTypeSourcePropsIncludes(source, props, includes, queryType, terms, recordStart, pageSize))
 				.collect(Collectors.toList());
 
 		return new ByteArrayInputStream(new TabDelUtility()
-				.produceMinTabDelOutputFromListWithHeading(reWrappers, terms, props, queryType, recordStart, pageSize).getBytes());
+				.produceMinTabDelOutputFromListWithHeadingProps(reWrappers, terms, props, queryType, recordStart, pageSize).getBytes());
 	}
+
 
 	
 }

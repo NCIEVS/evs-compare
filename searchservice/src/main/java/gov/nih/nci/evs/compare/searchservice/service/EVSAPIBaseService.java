@@ -114,8 +114,26 @@ public class EVSAPIBaseService {
 		terms = terms.replace(" ", "%20");
 		try {
 			return client.get().uri(new URI(
-					baseURL + "/" + source + "/search" + "?props=" + props 
+					baseSourceURL + "/" + source + "/search" + "?property=" + props 
 					+ "&includes=" + includes + "&type=" + querytype 
+					+ "&term=" + terms + "&fromRecord=" + start + "&pageSize=" + size))
+					.retrieve().bodyToMono(RestEntityWrapper.class).block();
+		} catch (URISyntaxException e) {
+			log.info("Bad Resource Request, check the URL for special characters: ", e);
+			return null;
+		}
+	}
+	
+
+	public RestEntityWrapper getConceptsBySourceInclusionType(String source, String includes, String querytype,
+			String terms, String start, String size) {
+		WebClient client = getNewWebClientWithBuffer();
+		terms = terms.trim();
+		terms = terms.replace(" ", "%20");
+		try {
+			return client.get().uri(new URI(
+					baseSourceURL + "/" + source + "/search?"
+					+ "includes=" + includes + "&type=" + querytype 
 					+ "&term=" + terms + "&fromRecord=" + start + "&pageSize=" + size))
 					.retrieve().bodyToMono(RestEntityWrapper.class).block();
 		} catch (URISyntaxException e) {
