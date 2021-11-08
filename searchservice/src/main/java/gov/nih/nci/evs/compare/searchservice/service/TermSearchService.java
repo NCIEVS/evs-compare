@@ -1,5 +1,7 @@
 package gov.nih.nci.evs.compare.searchservice.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,12 @@ public class TermSearchService {
 	public RestEntityWrapper getRestEntityInclusionsByTypeSourceIncludes(String source, String includes, String queryType,
 			String terms, String recordStart, String pageSize) {
 		RestEntityWrapper entities = service.getConceptsBySourceInclusionType(source, includes, queryType, terms, recordStart, pageSize);
+		return entities;
+	}
+	
+	public List<RestEntityWrapper> getRestEntityInclusionsByTypeSourceIncludesMultiTerm(String source, String includes, String queryType,
+			String terms, String recordStart, String pageSize) {
+		List<RestEntityWrapper> entities = service.getConceptsBySourceInclusionTypeMultipleTerms(source, includes, queryType, terms, recordStart, pageSize);
 		return entities;
 	}
 }

@@ -141,6 +141,28 @@ public class EVSAPIBaseService {
 			return null;
 		}
 	}
+	
+	public List<RestEntityWrapper> getConceptsBySourceInclusionTypeMultipleTerms(String source, String includes, String querytype,
+			String terms, String start, String size) {
+		WebClient client = getNewWebClientWithBuffer();
+		terms = terms.trim();
+		terms = terms.replace(" ", "%20");
+		List<String> termsList = CommonServices.splitInput(terms);
+
+			return termsList.stream().map(x -> {
+				try {
+					return client.get().uri(new URI(
+							baseSourceURL + "/" + source + "/search?"
+							+ "includes=" + includes + "&type=" + querytype 
+							+ "&term=" + x + "&fromRecord=" + start + "&pageSize=" + size))
+							.retrieve().bodyToMono(RestEntityWrapper.class).block();
+				} catch (URISyntaxException e) {
+					log.info("Bad Resource Request, check the URL for special characters: ", e);
+					return null;
+				}
+			}).collect(Collectors.toList());
+
+	}
 
 	public RestPropertyMetadata[] getRestProperties(RestTemplate template) {
 		return template.getForObject(baseMetaURL + propURL, RestPropertyMetadata[].class);

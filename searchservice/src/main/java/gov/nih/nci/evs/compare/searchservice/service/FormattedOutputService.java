@@ -57,7 +57,7 @@ public class FormattedOutputService {
 				.splitInput(terms)
 				.stream()
 				.map(x ->
-				tsservice.getRestEntityInclusionsByTypeSourceIncludes(source,includes, queryType, terms, recordStart, pageSize))
+				tsservice.getRestEntityInclusionsByTypeSourceIncludes(source,includes, queryType, x, recordStart, pageSize))
 				.collect(Collectors.toList());
 
 		return new ByteArrayInputStream(new TabDelUtility()

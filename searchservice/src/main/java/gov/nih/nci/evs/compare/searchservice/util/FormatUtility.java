@@ -10,7 +10,7 @@ public class FormatUtility {
 	public String produceDelimitedQueryRecord(
 			String separator, String term, String props, String queryType, String recordStart, String pageSize) {
 		String appendedQuery = "\r\n" + "\r\n" + "\r\n" +
-				"\r\n" + "Search parmeters: " + 
+				"\r\n" + "Search parameters: " + 
 				"\r\n" +  "\"|Input:  " + term + "|\"" +
 				"\r\n" +  "\"|Query Type:  " + queryType + "|\"" +
 				"\r\n" +  "\"|From Record:  " + recordStart + "|\"" +
