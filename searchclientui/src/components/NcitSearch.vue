@@ -294,7 +294,6 @@ export default {
         let trimmedFileText = this.text.split(/\r?\n|\r/g).join(',')
         console.log(trimmedFileText)
 
-
         let loader = useLoading();
         loader.show({
           // Optional parameters

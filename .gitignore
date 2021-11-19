@@ -9,6 +9,7 @@
 /searchclientui/dist/
 /searchclientui/node/
 /searchclientui/node_modules/
+/node_modules/
 /.settings/
 .project
 .DS_Store
