@@ -2,15 +2,21 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+
+  <groupId>gov.nih.nci.evs.search</groupId>
+  <artifactId>clientui</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>clientui</name>
+
   <parent>
     <groupId>gov.nih.nci.evs</groupId>
     <artifactId>compare</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>
+      ../pom.xml
+    </relativePath>
   </parent>
-  <groupId>gov.nih.nci.evs.search</groupId>
-  <artifactId>searchclientui</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>clientui</name>
+  
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
