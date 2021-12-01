@@ -10,7 +10,7 @@ const routes = [
     component: SearchSelection,
   },
   {
-    path: "/searchselection",
+    path: "/selection",
     name: "Search Selection",
     component: SearchSelection,
   },
@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     //component: SearchSelection
-    redirect: "/searchselection",
+    redirect: "/selection",
   },
 ];
 console.log("in router.... base: " + process.env.VUE_APP_ROOT_CONTEXT)
