@@ -10,6 +10,11 @@ const routes = [
     component: SearchSelection,
   },
   {
+    path: "/searchselection",
+    name: "Search Selection",
+    component: SearchSelection,
+  },
+  {
     path: "/ncitsearch",
     name: "NCIt Search",
     component: NcitSearch,
@@ -19,10 +24,18 @@ const routes = [
     name: "About",
     component: About,
   },
+  // if page is unknown, show main selection page.
+  {
+    path: '/:pathMatch(.*)*',
+    //component: SearchSelection
+    redirect: "/searchselection",
+  },
 ];
-
+console.log("in router.... base: " + process.env.VUE_APP_ROOT_CONTEXT)
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(process.env.VUE_APP_ROOT_CONTEXT),
+  //base: process.env.VUE_APP_ROOT_CONTEXT,
+
   routes,
 });
 
