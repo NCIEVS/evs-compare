@@ -10,6 +10,10 @@ require('bootstrap')
 
 import Notifications from '@kyvg/vue3-notification'
 
+import VueLoading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+
+
 // setup jquery
 window.$ = window.jQuery = jQuery
 
@@ -32,5 +36,6 @@ console.log('Base URL:     ' + app.config.globalProperties.$baseURL)
 
 app.use(Notifications)
 app.use(router)
+app.use(VueLoading);
 app.mount('#app')
 //createApp(App).use(router).mount('#app')

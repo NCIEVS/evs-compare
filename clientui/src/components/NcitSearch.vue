@@ -119,8 +119,8 @@
 import { ref } from 'vue';
 import api from '../api.js'
 import axios from 'axios'
-import { useLoading } from 'vue3-loading-overlay';
-import 'vue-loading-overlay/dist/vue-loading.css';
+// import { useLoading } from 'vue3-loading-overlay';
+// import 'vue-loading-overlay/dist/vue-loading.css';
 import { notify } from "@kyvg/vue3-notification";
 import TextReader from "./TextReader";
 
@@ -186,7 +186,6 @@ export default {
         "Type : " + this.typeSelected + "\n" +
         "Terminology : " + this.terminologySelected)
 
-
         console.log(this.textFromFile)
         notify({
           title: "Searching",
@@ -198,14 +197,6 @@ export default {
         // If the file has returns, convert them to commas
         let trimmedFileText = this.textFromFile.split(/\r?\n|\r/g).join(',')
         console.log(trimmedFileText)
-
-      let $loading = useLoading();
-        const loader = $loading.show({
-          // Optional parameters
-          container: this.fullPage ? null : this.formContainer.value,
-          canCancel: false,
-          onCancel: this.onCancel,
-        });
 
         let searchUrl=""
         if (this.searchByText) {
@@ -225,6 +216,15 @@ export default {
         console.log(
           searchUrl
         )
+
+        // const $loading = useLoading();
+        let loader = this.$loading.show({
+          // Optional parameters
+          container: this.fullPage ? null : this.formContainer.value,
+          canCancel: false,
+          onCancel: this.onCancel,
+        });
+
         axios({
             url: searchUrl,
             method: 'GET',
@@ -237,17 +237,12 @@ export default {
               fileLink.setAttribute('download', this.filename + '.' + this.extension);
               document.body.appendChild(fileLink);
               fileLink.click();
-loader.hide()
         }).catch(function(error) {
               console.error("Download Error: " + error);
               alert("Error Downloading file");
         }).finally(function() {
-          loader.hide()
+          loader.hide();
         });
-        // setTimeout(() => {
-        //     loader.hide()
-        //   },3000)
-
     }
   },
 
