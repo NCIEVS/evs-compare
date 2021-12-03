@@ -1,13 +1,16 @@
 import { createWebHistory, createRouter } from "vue-router";
 import SearchSelection from "@/components/SearchSelection.vue";
 import NcitSearch from "@/components/NcitSearch";
-import About from "@/components/About.vue";
+import Documentation from "@/components/Documentation.vue";
+import Home from "@/components/Home.vue";
 
 const routes = [
   {
     path: "/",
-    name: "Search Selection",
-    component: SearchSelection,
+    // name: "Search Selection",
+    // component: SearchSelection,
+    name: "Home",
+    component: Home,
   },
   {
     path: "/selection",
@@ -20,10 +23,11 @@ const routes = [
     component: NcitSearch,
   },
   {
-    path: "/about",
-    name: "About",
-    component: About,
+    path: "/documentation",
+    name: "Documentation",
+    component: Documentation,
   },
+
   // if page is unknown, show main selection page.
   {
     path: '/:pathMatch(.*)*',

@@ -48,8 +48,7 @@
             </li>
 
             <li class="nav-item">
-               <router-link class="nav-link" to="/about">About</router-link>
-              <!--router-link class="nav-link" v-bind:to="'/About'" title="Link to About">About</router-link-->
+               <router-link class="nav-link" to="/documentation">Documentation</router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="https://github.com/NCIEVS/report-exporter/issues" target="_blank" title="Link to Help">Help Forum</a>

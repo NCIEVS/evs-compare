@@ -6,10 +6,12 @@ import jQuery from 'jquery'
 import 'popper.js'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-require('bootstrap')
+import "bootstrap"
+
+import './assets/app.scss'
+//require('bootstrap')
 
 import Notifications from '@kyvg/vue3-notification'
-
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
