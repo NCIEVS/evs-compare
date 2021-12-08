@@ -51,7 +51,7 @@
                <router-link class="nav-link" to="/documentation">Documentation</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="https://github.com/NCIEVS/report-exporter/issues" target="_blank" title="Link to Help">Help Forum</a>
+              <a class="nav-link" href="https://github.com/NCIEVS/evs-compare/issues" target="_blank" title="Link to Help">Help Forum</a>
             </li>
 
           </ul>
