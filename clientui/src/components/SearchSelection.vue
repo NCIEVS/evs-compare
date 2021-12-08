@@ -5,7 +5,7 @@
     <Modal
       v-show="isModalVisible"
       @close="closeModal">
-      
+
       <template v-slot:header>
         Warning
       </template>
@@ -84,8 +84,9 @@
     },
     methods: {
       showModal() {
-        var tempWarningCookie = this.cookies.get(this.warningCookie);
-        if (!tempWarningCookie) {
+        var tempWarningCookie = this.cookies.get(this.warningCookie)
+        // only show if the build env is production
+        if (process.env.NODE_ENV == 'production' && !tempWarningCookie) {
           this.isModalVisible = true;
         }
       },
@@ -97,17 +98,11 @@
         this.cookies.set(this.warningCookie,"true");
       },
     },
-    mounted() {
-      let my_cookie_value = this.cookies.get("myCoookie");
-      console.log(my_cookie_value);
-      this.cookies.set("myCoookie", "abcdefg");
-    },
     created() {
       // scroll to the top of the page
       window.scrollTo(0,0);
       this.showModal()
     },
-
   }
 </script>
 

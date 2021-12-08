@@ -25,6 +25,8 @@ window.$ = window.jQuery = jQuery
 
 console.log('App Base URL: ' + process.env.VUE_APP_BASE_URL)
 console.log('Root Context: ' + process.env.VUE_APP_ROOT_CONTEXT)
+console.log('NODE_ENV: ' + process.env.NODE_ENV)
+
 //console.log('VUE_APP_GA_CODE:     ' + process.env.VUE_APP_GA_CODE)
 
 const app = createApp(App)
