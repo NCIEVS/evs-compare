@@ -9,12 +9,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap"
 
 import './assets/app.scss'
-//require('bootstrap')
 
 import Notifications from '@kyvg/vue3-notification'
 import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
+require('bootstrap')
 
 // setup jquery
 window.$ = window.jQuery = jQuery
@@ -26,7 +26,6 @@ window.$ = window.jQuery = jQuery
 console.log('App Base URL: ' + process.env.VUE_APP_BASE_URL)
 console.log('Root Context: ' + process.env.VUE_APP_ROOT_CONTEXT)
 //console.log('VUE_APP_GA_CODE:     ' + process.env.VUE_APP_GA_CODE)
-
 
 const app = createApp(App)
 
@@ -40,4 +39,3 @@ app.use(Notifications)
 app.use(router)
 app.use(VueLoading);
 app.mount('#app')
-//createApp(App).use(router).mount('#app')

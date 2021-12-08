@@ -109,8 +109,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 <!-- styling for the component -->
 <style>
 
-
-
 .documentation-container{
   padding: 45px 15px 45px 15px;
 }

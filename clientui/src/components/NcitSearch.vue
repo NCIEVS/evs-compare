@@ -273,12 +273,14 @@ export default {
 
 
 .instructionsContainercontainer {
- padding: 125px 50px 75px;
+  padding: 125px 50px 75px;
 }
 /* .container{
   padding: 45px 15px 5px 15px;
 } */
-
+/* .container {
+  max-width: 960px;
+} */
 .advancedSearch {
   background-color: rgb(0, 125, 188);
   border-color: rgb(0, 125, 188);
