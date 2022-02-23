@@ -1,4 +1,6 @@
 /target/
+/Docker/build/
+/Docker/evscompare/artifacts/
 /searchservice/bin/
 /searchservice/target/
 /searchservice/.settings/
