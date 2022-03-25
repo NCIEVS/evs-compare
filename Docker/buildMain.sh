@@ -123,7 +123,7 @@ function deployArtifacts() {
 	cd evscompare
 	docker build -f $ROOT_DIR/evscompare/Dockerfile --tag $TAG_EVS_COMPARE .
 	docker push $TAG_EVS_COMPARE
-	EVS_COMPARE_CONTAINER=$(docker run -d --name evs-comare -p 8081:8080  $TAG_EVS_COMPARE)
+	EVS_COMPARE_CONTAINER=$(docker run -d --name evs-comare -p 8080:8080  $TAG_EVS_COMPARE)
 
 	echo "DONE - BUILDING EVS-COMPARE CONTAINER"
 	cd ..
