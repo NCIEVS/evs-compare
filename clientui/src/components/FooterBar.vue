@@ -9,6 +9,8 @@
 						<a href="http://www.cancer.gov/global/web/policies/accessibility" title="link to NCI Accessibility Policies">Accessibility</a>
 						&nbsp; | &nbsp;
 						<a href="http://www.cancer.gov/global/web/policies/foia" title="link to FOIA">FOIA</a>
+						&nbsp; | &nbsp;
+						<a href="https://www.hhs.gov/vulnerability-disclosure-policy" title="link to HHS Vulnerability Disclosure">HHS Vulnerability Disclosure</a>
 					</p>
 					<p>
 						<a href="http://www.hhs.gov/" target="_blank" title="link to HHS.gov">U.S. Department of Health and Human Services</a>
